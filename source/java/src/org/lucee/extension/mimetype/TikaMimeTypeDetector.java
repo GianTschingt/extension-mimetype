@@ -6,7 +6,6 @@ import java.net.URL;
 
 import org.apache.tika.Tika;
 import org.apache.tika.metadata.Metadata;
-import org.apache.tika.metadata.TikaCoreProperties;
 
 import lucee.commons.io.res.Resource;
 import lucee.loader.engine.CFMLEngine;
@@ -67,7 +66,7 @@ public class TikaMimeTypeDetector implements MimeTypeDetector {
 		String name = eng.getStringUtil().isEmpty(fileName, true) ? res.getName() : fileName.trim();
 
 		Metadata md = new Metadata();
-		md.set(TikaCoreProperties.RESOURCE_NAME_KEY, name);
+		md.set(Metadata.RESOURCE_NAME_KEY, name);
 		md.set(Metadata.CONTENT_LENGTH, Long.toString(res.length()));
 
 		InputStream is = null;

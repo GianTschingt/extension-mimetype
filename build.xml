@@ -64,7 +64,6 @@
             <arg value="clean"/>
             <arg value="${effective.goal}"/>
             <arg value="-Drevision=${bundleversion}"/>
-            <arg value="-DluceeCoreVersion=${luceeCoreVersion}"/>
             <arg value="-DperformRelease=${is.deploy}"/>
             <!-- <arg value="-X"/>  Debug output -->
             <arg value="-e"/>  <!-- Error details -->
@@ -86,7 +85,6 @@
             <arg value="-Dmdep.useRepositoryLayout=true"/>
             <arg value="-DexcludeScope=provided"/>
             <arg value="-Drevision=${bundleversion}"/>
-            <arg value="-DluceeCoreVersion=${luceeCoreVersion}"/>
             <arg value="dependency:copy-dependencies"/>
         </exec>
 
@@ -115,14 +113,7 @@
     </copy>
 
     <!-- Copy POM from source location -->
-    <copy file="source/java/pom.xml" tofile="${dist}/extension/maven/${mvnArtifactId}-${bundleversion}.pom">
-        <!-- LDEV-6638: the Lucee version comes from the root pom, write the real value into the shipped pom -->
-        <filterchain>
-            <tokenfilter>
-                <replacestring from="$${luceeCoreVersion}" to="${luceeCoreVersion}"/>
-            </tokenfilter>
-        </filterchain>
-    </copy>
+    <copy file="source/java/pom.xml" tofile="${dist}/extension/maven/${mvnArtifactId}-${bundleversion}.pom"/>
     
     <!-- Ensure the target directory exists -->
     <mkdir dir="${dist}/extension/maven/org/lucee/${mvnArtifactId}/${bundleversion}/" />

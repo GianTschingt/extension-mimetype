@@ -183,18 +183,17 @@
   
   
     <dependencies>
-        <!-- LDEV-6638: current tika-core 3.x (1.x is end of life since 2022) -->
+        <!-- LDEV-6638: the last 1.x release, same line as the tika-core Lucee shipped in the core before -->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
-            <version>3.3.3</version>
+            <version>1.28.5</version>
         </dependency>
 
         <dependency>
             <groupId>org.lucee</groupId>
             <artifactId>lucee</artifactId>
-            <!-- LDEV-6638: set by the root pom (property luceeCoreVersion), passed in by build.xml -->
-            <version>${luceeCoreVersion}</version>
+            <version>9.0.0.4-ALPHA</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
