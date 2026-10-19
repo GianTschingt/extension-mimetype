@@ -85,13 +85,26 @@ jobs:
           path: lucee
           ref: ${{ matrix.lucee.branch }}
 
+      # Lucee 9 alphas are not on update.lucee.org / the CDN, so fetch the light jar from Maven Central
+      # (version comes from the LUCEE_TEST_VERSIONS_9 matrix entry, e.g. "9.0.0.4-ALPHA")
+      - name: Download Lucee light jar from Maven Central
+        id: lucee-jar
+        env:
+          LUCEE_VERSION: ${{ matrix.lucee.version }}
+        run: |
+          JAR="${{ runner.temp }}/lucee-light-${LUCEE_VERSION}.jar"
+          URL="https://repo1.maven.org/maven2/org/lucee/lucee/${LUCEE_VERSION}/lucee-${LUCEE_VERSION}-light.jar"
+          echo "Downloading ${URL}"
+          curl -fsSL --retry 3 -o "${JAR}" "${URL}"
+          echo "path=${JAR}" >> "$GITHUB_OUTPUT"
+
       - name: Run Lucee Test Suite
         uses: lucee/script-runner@main
         with:
           webroot: ${{ github.workspace }}/lucee/test
           execute: /bootstrap-tests.cfm
           luceeVersion: ${{ matrix.lucee.version }}
-          luceeVersionQuery: ${{ matrix.lucee.query }}
+          luceeJar: ${{ steps.lucee-jar.outputs.path }}
           extensionDir: ${{ github.workspace }}/target
         env:
           testLabels: mimetype
