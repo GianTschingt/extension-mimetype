@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import org.apache.tika.Tika;
+import org.apache.tika.metadata.HttpHeaders;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.metadata.TikaCoreProperties;
 
@@ -68,7 +69,7 @@ public class TikaMimeTypeDetector implements MimeTypeDetector {
 
 		Metadata md = new Metadata();
 		md.set(TikaCoreProperties.RESOURCE_NAME_KEY, name);
-		md.set(Metadata.CONTENT_LENGTH, Long.toString(res.length()));
+		md.set(HttpHeaders.CONTENT_LENGTH, res.length());
 
 		InputStream is = null;
 		try {
