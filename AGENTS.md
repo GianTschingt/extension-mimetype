@@ -13,7 +13,7 @@ Maven-based Lucee extension that replaces Lucee's built-in mime type detection (
 
 ## Build
 
-Requires JDK 11+ and Maven. The Lucee dependency (`org.lucee:lucee`, scope provided) must be available in the local Maven repository for the version in `source/java/pom.xml`.
+Requires JDK 21 (the Lucee 9 jar has Java 21 class files, javac cannot read them with an older JDK) and Maven. The Lucee dependency (`org.lucee:lucee`, scope provided) must be available in the local Maven repository for the version in `source/java/pom.xml`.
 
 ```bash
 mvn clean install -Dgoal=install
