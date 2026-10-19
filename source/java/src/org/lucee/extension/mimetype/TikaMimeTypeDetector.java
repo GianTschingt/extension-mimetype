@@ -69,7 +69,8 @@ public class TikaMimeTypeDetector implements MimeTypeDetector {
 
 		Metadata md = new Metadata();
 		md.set(TikaCoreProperties.RESOURCE_NAME_KEY, name);
-		md.set(HttpHeaders.CONTENT_LENGTH, res.length());
+		// Tika 4: CONTENT_LENGTH is a TEXT property, setting a long throws PropertyTypeException
+		md.set(HttpHeaders.CONTENT_LENGTH, Long.toString(res.length()));
 
 		InputStream is = null;
 		try {
